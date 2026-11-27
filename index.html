@@ -31,8 +31,13 @@ section{padding:58px 16px}
 .cover{height:auto;min-height:620px}
 .cover-content{bottom:24px}
 }
+
+.music-toggle{position:fixed;z-index:20;right:18px;bottom:20px;width:54px;height:54px;border:1px solid #e6c88f;border-radius:50%;background:#302344;color:#f5dca9;box-shadow:0 5px 18px #1b142855;display:grid;place-items:center;font-size:22px;cursor:pointer}
+.music-toggle:focus-visible{outline:3px solid #d7b477;outline-offset:3px}
+.music-toggle .music-label{position:absolute;right:62px;white-space:nowrap;background:#302344;color:#fff8ed;border:1px solid #d7b477;border-radius:20px;padding:7px 11px;font:12px 'DM Sans',sans-serif}
+@media(max-width:650px){.music-toggle{right:14px;bottom:max(14px,env(safe-area-inset-bottom));width:50px;height:50px}}
 </style></head><body>
-<button class="lang" id="lang">ಕನ್ನಡ</button>
+<button class="lang" id="lang">ಕನ್ನಡ</button>\n<button class="music-toggle" id="musicToggle" type="button" aria-label="Play wedding music" aria-pressed="false"><span id="musicIcon" aria-hidden="true">♫</span><span class="music-label" id="musicLabel">Play music</span></button>\n<audio id="weddingMusic" preload="metadata" src="wedding-invitation-music-46s.mp3"></audio>
 <header class="cover"><div class="garden"></div><svg class="scene" id="coverScene" viewBox="0 0 1200 850" preserveAspectRatio="xMidYMid slice" aria-label="A boy playing piano and a girl dancing Bharatanatyam in a glowing garden">
 <defs><linearGradient id="path" x2="0" y2="1"><stop stop-color="#f6d6a0" stop-opacity="0"/><stop offset="1" stop-color="#f6d6a0" stop-opacity=".5"/></linearGradient><radialGradient id="glow"><stop stop-color="#ffe4a7" stop-opacity=".9"/><stop offset="1" stop-color="#ffe4a7" stop-opacity="0"/></radialGradient></defs>
 <ellipse cx="600" cy="570" rx="470" ry="260" fill="url(#glow)" opacity=".55"/><path d="M0 650 Q600 520 1200 650 L1200 850H0Z" fill="url(#path)"/>
@@ -53,7 +58,17 @@ section{padding:58px 16px}
 <section class="family"><div class="script">With blessings</div><h2 data-en="Our families" data-kn="ನಮ್ಮ ಕುಟುಂಬಗಳು">Our families</h2><p>Shobha</p><p>Maanyaath</p><p>Kanchana & Suresh</p></section>
 <footer class="footer"><div class="script">With love</div><h2>Shobhith & Sabhya</h2><p>14 May 2027 · Samaya Venue and Leisure</p></footer>
 <script>
-const coverScene=document.getElementById('coverScene');
+
+const weddingMusic=document.getElementById('weddingMusic');
+const musicToggle=document.getElementById('musicToggle');
+const musicIcon=document.getElementById('musicIcon');
+const musicLabel=document.getElementById('musicLabel');
+function setMusicState(playing){musicIcon.textContent=playing?'Ⅱ':'♫';musicLabel.textContent=playing?'Pause music':'Play music';musicToggle.setAttribute('aria-label',playing?'Pause wedding music':'Play wedding music');musicToggle.setAttribute('aria-pressed',String(playing))}
+musicToggle.addEventListener('click',async()=>{if(weddingMusic.paused){try{await weddingMusic.play();setMusicState(true)}catch(error){setMusicState(false);musicLabel.textContent='Tap to play'}}else{weddingMusic.pause();setMusicState(false)}});
+weddingMusic.addEventListener('ended',()=>{weddingMusic.currentTime=0;setMusicState(false)});
+weddingMusic.addEventListener('pause',()=>setMusicState(false));
+weddingMusic.addEventListener('play',()=>setMusicState(true));
+\nconst coverScene=document.getElementById('coverScene');
 function fitCoverScene(){coverScene.setAttribute('preserveAspectRatio',window.matchMedia('(max-width:650px)').matches?'xMidYMid meet':'xMidYMid slice')}
 fitCoverScene();window.addEventListener('resize',fitCoverScene);
 let lang='en';document.getElementById('lang').onclick=()=>{lang=lang==='en'?'kn':'en';document.documentElement.lang=lang;document.querySelectorAll('[data-en]').forEach(e=>e.innerHTML=e.dataset[lang]);document.getElementById('lang').textContent=lang==='en'?'ಕನ್ನಡ':'English';tick()};
