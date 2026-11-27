@@ -48,7 +48,7 @@ section{padding:58px 16px}
 </style></head><body>
 <button class="lang" id="lang">ಕನ್ನಡ</button>
 <button class="music-toggle" id="musicToggle" type="button" aria-label="Play wedding music" aria-pressed="false"><span id="musicIcon" aria-hidden="true">♫</span><span class="music-label" id="musicLabel">Play music</span></button>
-<audio id="weddingMusic" preload="metadata" src="wedding-invitation-music-46s.mp3"></audio>
+<audio id="weddingMusic" preload="metadata" src="./wedding-invitation-music-46s.mp3"></audio>
 <header class="cover"><div class="garden"></div><svg class="scene" id="coverScene" viewBox="0 0 1200 850" preserveAspectRatio="xMidYMid slice" aria-label="A boy playing piano and a girl dancing Bharatanatyam in a glowing garden">
 <defs><linearGradient id="path" x2="0" y2="1"><stop stop-color="#f6d6a0" stop-opacity="0"/><stop offset="1" stop-color="#f6d6a0" stop-opacity=".5"/></linearGradient><radialGradient id="glow"><stop stop-color="#ffe4a7" stop-opacity=".9"/><stop offset="1" stop-color="#ffe4a7" stop-opacity="0"/></radialGradient></defs>
 <ellipse cx="600" cy="570" rx="470" ry="260" fill="url(#glow)" opacity=".55"/><path d="M0 650 Q600 520 1200 650 L1200 850H0Z" fill="url(#path)"/>
@@ -79,6 +79,7 @@ musicToggle.addEventListener('click',async()=>{if(weddingMusic.paused){try{await
 weddingMusic.addEventListener('ended',()=>{weddingMusic.currentTime=0;setMusicState(false)});
 weddingMusic.addEventListener('pause',()=>setMusicState(false));
 weddingMusic.addEventListener('play',()=>setMusicState(true));
+weddingMusic.addEventListener('error',()=>{setMusicState(false);musicLabel.textContent='Audio unavailable';musicToggle.setAttribute('aria-label','Wedding audio unavailable')});
 
 const coverScene=document.getElementById('coverScene');
 function fitCoverScene(){coverScene.setAttribute('preserveAspectRatio',window.matchMedia('(max-width:650px)').matches?'xMidYMid meet':'xMidYMid slice')}
@@ -86,13 +87,5 @@ fitCoverScene();window.addEventListener('resize',fitCoverScene);
 let lang='en';document.getElementById('lang').onclick=()=>{lang=lang==='en'?'kn':'en';document.documentElement.lang=lang;document.querySelectorAll('[data-en]').forEach(e=>e.innerHTML=e.dataset[lang]);document.getElementById('lang').textContent=lang==='en'?'ಕನ್ನಡ':'English';tick()};
 const c=document.getElementById('scratch'),x=c.getContext('2d');function setup(){let r=c.getBoundingClientRect(),d=devicePixelRatio||1;c.width=r.width*d;c.height=r.height*d;x.setTransform(d,0,0,d,0,0);x.fillStyle='#b8b3ac';x.fillRect(0,0,r.width,r.height);x.fillStyle='#51464b';x.font='16px sans-serif';x.textAlign='center';x.fillText('✧ SCRATCH HERE ✧',r.width/2,r.height/2+5);x.globalCompositeOperation='destination-out'}setup();let down=false;function rub(e){if(!down)return;let r=c.getBoundingClientRect();x.beginPath();x.arc(e.clientX-r.left,e.clientY-r.top,24,0,7);x.fill()}c.onpointerdown=e=>{down=true;c.setPointerCapture(e.pointerId);rub(e)};c.onpointermove=rub;c.onpointerup=()=>down=false;window.onresize=setup;
 function tick(){let d=Math.max(0,new Date('2027-05-14T10:00:00+05:30')-Date.now()),v=[[Math.floor(d/864e5),'Days','ದಿನಗಳು'],[Math.floor(d%864e5/36e5),'Hours','ಗಂಟೆಗಳು'],[Math.floor(d%36e5/6e4),'Minutes','ನಿಮಿಷಗಳು'],[Math.floor(d%6e4/1e3),'Seconds','ಸೆಕೆಂಡುಗಳು']];document.getElementById('count').innerHTML=v.map(a=>'<div>'+String(a[0]).padStart(2,'0')+'<span>'+(lang==='en'?a[1]:a[2])+'</span></div>').join('')}tick();setInterval(tick,1000);
-function calendar(){let b='BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-DTSTART;TZID=Asia/Kolkata:20270514T100000
-DTEND;TZID=Asia/Kolkata:20270514T230000
-SUMMARY:Shobhith & Sabhya Wedding
-LOCATION:Samaya Venue and Leisure, Hessarghatta, Bengaluru, India
-END:VEVENT
-END:VCALENDAR',a=document.createElement('a');a.href=URL.createObjectURL(new Blob([b],{type:'text/calendar'}));a.download='shobhith-sabhya-wedding.ics';a.click();URL.revokeObjectURL(a.href)}
+function calendar(){let b=['BEGIN:VCALENDAR','VERSION:2.0','BEGIN:VEVENT','DTSTART;TZID=Asia/Kolkata:20270514T100000','DTEND;TZID=Asia/Kolkata:20270514T230000','SUMMARY:Shobhith & Sabhya Wedding','LOCATION:Samaya Venue and Leisure, Hessarghatta, Bengaluru, India','END:VEVENT','END:VCALENDAR'].join('\r\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([b],{type:'text/calendar'}));a.download='shobhith-sabhya-wedding.ics';a.click();URL.revokeObjectURL(a.href)}
 </script></body></html>
