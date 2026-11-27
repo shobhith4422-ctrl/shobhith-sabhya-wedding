@@ -32,10 +32,10 @@ section{padding:58px 16px}
 .cover-content{bottom:24px}
 }
 
-.music-toggle{position:fixed;z-index:20;right:18px;bottom:20px;width:54px;height:54px;border:1px solid #e6c88f;border-radius:50%;background:#302344;color:#f5dca9;box-shadow:0 5px 18px #1b142855;display:grid;place-items:center;font-size:22px;cursor:pointer}
+.music-toggle{position:fixed;z-index:20;right:18px;top:max(20px,env(safe-area-inset-top));width:54px;height:54px;border:1px solid #e6c88f;border-radius:50%;background:#302344;color:#f5dca9;box-shadow:0 5px 18px #1b142855;display:grid;place-items:center;font-size:22px;cursor:pointer}
 .music-toggle:focus-visible{outline:3px solid #d7b477;outline-offset:3px}
 .music-toggle .music-label{position:absolute;right:62px;white-space:nowrap;background:#302344;color:#fff8ed;border:1px solid #d7b477;border-radius:20px;padding:7px 11px;font:12px 'DM Sans',sans-serif}
-@media(max-width:650px){.music-toggle{right:14px;bottom:max(14px,env(safe-area-inset-bottom));width:50px;height:50px}}
+@media(max-width:650px){.music-toggle{right:14px;top:max(14px,env(safe-area-inset-top));width:50px;height:50px}}
 
 /* Gentle motion on the wedding cover: piano player and dancer */
 #piano-scene{transform-box:fill-box;transform-origin:50% 75%;animation:pianoSway 2.8s ease-in-out infinite}
