@@ -115,8 +115,13 @@ section{padding:58px 16px}
 <section class="dark venue-section"><div class="venue-content"><div class="script">Join us at</div><h2>Samaya Venue and Leisure</h2><p>Hessarghatta, Bengaluru, Karnataka, India</p><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Samaya+Venue+and+Leisure+Hessarghatta+Bengaluru">OPEN IN GOOGLE MAPS ↗</a></div></section>
 
 <section class="family"><div class="script">With blessings</div><h2 data-en="Our families" data-kn="ನಮ್ಮ ಕುಟುಂಬಗಳು">Our families</h2><p>Shobha & Sharath</p><p>Kanchana & Suresh</p><p>Maanyaath</p></section>
-<footer class="footer"><div class="footer-video" aria-hidden="true"><video autoplay muted loop playsinline preload="auto" disablepictureinpicture><source src="./withlove_compressed%20(1).mp4" type="video/mp4"></video></div><div class="script">With love</div><h2>Shobhith & Sabhya</h2><p>14 May 2027 · Samaya Venue and Leisure</p></footer>
+<footer class="footer"><div class="footer-video" aria-hidden="true"><video id="footerVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture><source src="./withlove_compressed%20(1).mp4" type="video/mp4"></video></div><div class="script">With love</div><h2>Shobhith & Sabhya</h2><p>14 May 2027 · Samaya Venue and Leisure</p></footer>
 <script>
+
+const footerVideo=document.getElementById('footerVideo');
+// Mobile browsers can defer muted autoplay until the video is visible or the page becomes active.
+async function tryFooterVideo(){if(!footerVideo||document.visibilityState==='hidden')return;footerVideo.muted=true;try{await footerVideo.play()}catch(error){/* Autoplay may be blocked by browser or device settings; retry on the next visibility/viewport event. */}}
+if(footerVideo){footerVideo.muted=true;footerVideo.playsInline=true;footerVideo.addEventListener('loadeddata',tryFooterVideo,{once:true});window.addEventListener('load',tryFooterVideo);window.addEventListener('pageshow',tryFooterVideo);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')tryFooterVideo()});if('IntersectionObserver'in window){const footerVideoObserver=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting))tryFooterVideo()},{threshold:0.15});footerVideoObserver.observe(footerVideo)}else{window.addEventListener('scroll',tryFooterVideo,{passive:true})}}
 
 const weddingMusic=document.getElementById('weddingMusic');
 const musicToggle=document.getElementById('musicToggle');
