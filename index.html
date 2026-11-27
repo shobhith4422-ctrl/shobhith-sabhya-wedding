@@ -59,7 +59,7 @@ section{padding:58px 16px}
 .story-journey svg{display:block;width:100%;height:auto;overflow:visible}
 .story-journey .journey-line{fill:none;stroke:#c6a56b;stroke-width:3;stroke-linecap:round;stroke-dasharray:9 11;animation:journeyDraw 5s ease-in-out infinite}
 .story-journey .journey-dot{fill:#e5c98f;stroke:#243b35;stroke-width:4}
-.story-journey .story-stage{opacity:0;animation:stageReveal 1.1s ease-out forwards}
+.story-journey .story-stage{opacity:0;animation:stageReveal 1.1s ease-out forwards;transform-box:initial}
 .story-journey .stage-school{animation-delay:.3s}
 .story-journey .stage-college{animation-delay:1.5s}
 .story-journey .stage-grown{animation-delay:2.7s}
@@ -72,7 +72,7 @@ section{padding:58px 16px}
 .story-journey .stage-college{animation-delay:2s}
 .story-journey .stage-wedding{animation-delay:3.8s}
 @keyframes journeyDraw{0%{stroke-dashoffset:160}100%{stroke-dashoffset:0}}
-@keyframes stageReveal{to{opacity:1;transform:translateY(0)}}
+@keyframes stageReveal{from{opacity:0}to{opacity:1}}
 @keyframes walkForward{0%,100%{translate:0 0}50%{translate:9px -2px}}
 @keyframes legSwing{from{rotate:-18deg}to{rotate:18deg}}
 @keyframes armSwing{from{rotate:16deg}to{rotate:-16deg}}
