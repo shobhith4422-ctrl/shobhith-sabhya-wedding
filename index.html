@@ -142,6 +142,48 @@ section{padding:58px 16px}
   .footer>p{font-size:.64rem;letter-spacing:.1em}
 }
 
+
+/* Animated, expandable family tree */
+.family-tree-trigger{margin:22px auto 4px;padding:13px 22px;border:1px solid #c6a56b;border-radius:30px;background:#243b35;color:#fbf7ef;font:600 .9rem "DM Sans",sans-serif;letter-spacing:.04em;cursor:pointer;box-shadow:0 8px 22px #243b3520;transition:transform .25s,box-shadow .25s,background .25s}
+.family-tree-trigger:hover{transform:translateY(-3px);background:#314d43;box-shadow:0 12px 26px #243b3530}
+.family-tree-modal{position:fixed;z-index:1000;inset:0;display:none;align-items:center;justify-content:center;padding:22px}
+.family-tree-modal.is-open{display:flex}
+.family-tree-backdrop{position:absolute;inset:0;background:#14231fe8;backdrop-filter:blur(7px);animation:treeFade .35s ease both}
+.family-tree-panel{position:relative;z-index:1;width:min(1120px,100%);max-height:min(90svh,900px);overflow:auto;padding:36px clamp(18px,4vw,46px) 42px;background:radial-gradient(ellipse at 50% 0,#fffdf8,#f5eddf 75%,#eee2ce);border:1px solid #d2b77f;box-shadow:0 24px 90px #0005;text-align:center;animation:treeRise .55s cubic-bezier(.2,.8,.2,1) both}
+.family-tree-close{position:sticky;float:right;top:0;margin:-17px -15px 0 0;width:40px;height:40px;border:1px solid #c6a56b;border-radius:50%;background:#fffaf1;color:#243b35;font-size:27px;line-height:1;cursor:pointer}
+.family-tree-panel>.script{color:#ae8950;font-size:clamp(1.7rem,4vw,2.3rem)}
+.family-tree-panel>h2{color:#243b35;margin:4px 0 8px}
+.family-tree-intro{max-width:58ch;margin:0 auto 28px;color:#7d715f;font:italic 1.12rem/1.5 "Cormorant Garamond",serif}
+.family-tree-columns{display:grid;grid-template-columns:1fr 1fr;gap:22px;text-align:center}
+.tree-branch{min-width:0;padding:20px 16px 22px;border:1px solid #d9c69f;background:#fffdf8b8;box-shadow:0 8px 25px #42331a0c}
+.tree-branch>h3{margin:0 0 17px;color:#9c7946;font:600 1.55rem "Bodoni Moda",serif}
+.tree-root{position:relative;width:fit-content;max-width:100%;margin:0 auto 28px;padding:14px 22px;border-radius:40px;background:#243b35;color:#fff8e9;box-shadow:0 7px 18px #243b3525}
+.tree-root:after{content:"";position:absolute;top:100%;left:50%;height:28px;border-left:1px solid #c6a56b}
+.tree-root strong,.tree-family strong{display:block;font:600 1.05rem "Cormorant Garamond",serif}
+.tree-root small,.tree-family>small{display:block;margin-top:4px;color:#c9b68f;font: .68rem "DM Sans",sans-serif;letter-spacing:.04em}
+.tree-children{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;position:relative}
+.tree-children:before{content:"";position:absolute;top:-1px;left:16%;right:16%;border-top:1px solid #c6a56b}
+.tree-family{position:relative;min-width:0;padding:14px 9px 12px;border:1px solid #e1d1b2;background:#fffaf0;animation:treeNodeIn .65s both}
+.tree-children>.tree-family:before{content:"";position:absolute;left:50%;bottom:100%;height:14px;border-left:1px solid #c6a56b}
+.tree-family strong{color:#2c4037;font-size:1.03rem}
+.tree-couple{margin-top:9px;color:#876b42;font:600 .84rem "Cormorant Garamond",serif;overflow-wrap:anywhere}
+.tree-couple span,.maternal-list strong span{color:#c6a56b;padding:0 3px}
+.tree-family>small{color:#9a8665;line-height:1.5}
+.tree-secondary{margin-top:10px}
+.tree-descendants{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-top:12px;padding-top:10px;border-top:1px solid #eadfc9}
+.tree-descendants span{padding:5px 8px;border-radius:18px;background:#e9eddf;color:#35483c;font:600 .76rem "DM Sans",sans-serif}
+.tree-descendants small{flex-basis:100%;color:#9a8665;font: .63rem "DM Sans",sans-serif}
+.tree-descendants.tree-grandchildren{background:#f8f1e4;margin-top:7px}
+.maternal-list{display:grid;grid-template-columns:1fr;gap:9px}
+.maternal-list .tree-family{padding:13px 10px}
+.maternal-list .tree-family strong{font-size:1.08rem}
+.maternal-list .tree-descendants{margin-top:9px}
+@keyframes treeFade{from{opacity:0}to{opacity:1}}
+@keyframes treeRise{from{opacity:0;transform:translateY(24px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes treeNodeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.tree-children>.tree-family:nth-child(2){animation-delay:.12s}.tree-children>.tree-family:nth-child(3){animation-delay:.24s}
+@media(max-width:760px){.family-tree-modal{padding:8px}.family-tree-panel{max-height:94svh;padding:27px 12px 28px}.family-tree-columns{grid-template-columns:1fr;gap:14px}.tree-children{grid-template-columns:1fr;gap:14px}.tree-children:before{display:none}.tree-children>.tree-family:before{height:14px}.tree-branch{padding:17px 10px}.tree-family{padding:14px}.family-tree-close{margin:-13px -5px 0 0}}
+@media(prefers-reduced-motion:reduce){.family-tree-backdrop,.family-tree-panel,.tree-family{animation:none!important}.family-tree-trigger{transition:none}}
 </style></head><body>
 <button class="lang" id="lang">ಕನ್ನಡ</button>
 <button class="music-toggle" id="musicToggle" type="button" aria-label="Play wedding music" data-en-aria="Play wedding music" data-kn-aria="ಮದುವೆಯ ಸಂಗೀತ ಆಲಿಸಿ" aria-pressed="false"><span id="musicIcon" aria-hidden="true">♫</span><span class="music-label" id="musicLabel">Play music</span></button>
@@ -177,7 +219,37 @@ section{padding:58px 16px}
 <section><div class="script" data-en="The big day" data-kn="ಆ ಶುಭದಿನ">The big day</div><h2 data-en="Counting every moment" data-kn="ಆ ಶುಭಕ್ಷಣದ ಆಗಮನದ ನಿರೀಕ್ಷೆಯಲ್ಲಿ">Counting every moment</h2><div class="count" id="count"></div><p data-en="14 May 2027" data-kn="14 ಮೇ 2027">14 May 2027</p></section>
 <section class="dark venue-section"><div class="venue-content"><div class="script" data-en="Join us at" data-kn="ನಿಮ್ಮನ್ನು ಆತ್ಮೀಯವಾಗಿ ಆಹ್ವಾನಿಸುತ್ತೇವೆ">Join us at</div><h2>Samaya Venue and Leisure</h2><p lang="en">Hessarghatta, Bengaluru, Karnataka, India</p><p class="venue-address-kn" lang="kn">ಹೆಸರಘಟ್ಟ, ಬೆಂಗಳೂರು, ಕರ್ನಾಟಕ, ಭಾರತ</p><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Samaya+Venue+and+Leisure+Hessarghatta+Bengaluru"><span data-en="OPEN IN GOOGLE MAPS ↗" data-kn="ಗೂಗಲ್ ನಕ್ಷೆಯಲ್ಲಿ ಸ್ಥಳ ವೀಕ್ಷಿಸಿ ↗">OPEN IN GOOGLE MAPS ↗</span></a></div></section>
 
-<section class="family"><div class="script" data-en="With blessings" data-kn="ಹಿರಿಯರ ಆಶೀರ್ವಾದದೊಂದಿಗೆ">With blessings</div><h2 data-en="Our families" data-kn="ನಮ್ಮ ಕುಟುಂಬಗಳು">Our families</h2><p data-en="Kanchana &amp; Suresh" data-kn="ಕಾಂಚನಾ ಮತ್ತು ಸುರೇಶ್">Kanchana & Suresh</p><p data-en="Maanyaath Suresh Krishna" data-kn="ಮಾನ್ಯಾತ್ ಸುರೇಶ್ ಕೃಷ್ಣ">Maanyaath Suresh Krishna</p></section>
+<section class="family"><div class="script" data-en="With blessings" data-kn="ಹಿರಿಯರ ಆಶೀರ್ವಾದದೊಂದಿಗೆ">With blessings</div><h2 data-en="Our families" data-kn="ನಮ್ಮ ಕುಟುಂಬಗಳು">Our families</h2><p data-en="Kanchana &amp; Suresh" data-kn="ಕಾಂಚನಾ ಮತ್ತು ಸುರೇಶ್">Kanchana & Suresh</p><p data-en="Maanyaath Suresh Krishna" data-kn="ಮಾನ್ಯಾತ್ ಸುರೇಶ್ ಕೃಷ್ಣ">Maanyaath Suresh Krishna</p><button class="family-tree-trigger" id="openFamilyTree" type="button"><span data-en="Explore our family tree" data-kn="ನಮ್ಮ ಕುಟುಂಬ ವೃಕ್ಷವನ್ನು ವೀಕ್ಷಿಸಿ">Explore our family tree</span> <span aria-hidden="true">↗</span></button></section>
+<div class="family-tree-modal" id="familyTreeModal" aria-hidden="true">
+  <div class="family-tree-backdrop" data-close-family-tree></div>
+  <div class="family-tree-panel" role="dialog" aria-modal="true" aria-labelledby="familyTreeTitle">
+    <button class="family-tree-close" type="button" aria-label="Close family tree" data-close-family-tree>×</button>
+    <div class="script" data-en="The roots of our story" data-kn="ನಮ್ಮ ಕಥೆಯ ಬೇರುಗಳು">The roots of our story</div>
+    <h2 id="familyTreeTitle" data-en="Our Family Tree" data-kn="ನಮ್ಮ ಕುಟುಂಬ ವೃಕ್ಷ">Our Family Tree</h2>
+    <p class="family-tree-intro" data-en="Two families, generations of love, and the people who made us who we are." data-kn="ಎರಡು ಕುಟುಂಬಗಳು, ತಲೆಮಾರುಗಳ ಪ್ರೀತಿ ಮತ್ತು ನಮ್ಮ ಬದುಕಿಗೆ ಅರ್ಥ ನೀಡಿದ ಆತ್ಮೀಯರು.">Two families, generations of love, and the people who made us who we are.</p>
+    <div class="family-tree-columns">
+      <section class="tree-branch">
+        <h3 data-en="Paternal Family" data-kn="ತಂದೆಯ ಕಡೆಯ ಕುಟುಂಬ">Paternal Family</h3>
+        <div class="tree-root"><strong>Venkamma &amp; Krishnamurthy</strong><small data-en="Grandparents" data-kn="ಅಜ್ಜ-ಅಜ್ಜಿ">Grandparents</small></div>
+        <div class="tree-children">
+          <article class="tree-family"><strong>Vanajakshi</strong><div class="tree-couple">Venkatesh <span>·</span> Mala</div><small data-en="Son · Daughter-in-law" data-kn="ಮಗ · ಸೊಸೆ">Son · Daughter-in-law</small><div class="tree-descendants"><span>Shreya</span><span>Hanvith</span><small data-en="Grandchildren" data-kn="ಮೊಮ್ಮಕ್ಕಳು">Grandchildren</small></div></article>
+          <article class="tree-family"><strong>Chandrakantha</strong><div class="tree-couple">Vasu <span>·</span> Chandrika</div><small data-en="Son · Daughter-in-law" data-kn="ಮಗ · ಸೊಸೆ">Son · Daughter-in-law</small><div class="tree-couple tree-secondary">Vinutha <span>·</span> Nagendra</div><small data-en="Daughter · Son-in-law" data-kn="ಮಗಳು · ಅಳಿಯ">Daughter · Son-in-law</small><div class="tree-descendants"><span>Sanvikha</span><small data-en="Grandchild" data-kn="ಮೊಮ್ಮಗು">Grandchild</small></div></article>
+          <article class="tree-family"><strong>Suresh</strong><div class="tree-couple">Suresh <span>·</span> Kanchana</div><small data-en="Son · Wife" data-kn="ಮಗ · ಪತ್ನಿ">Son · Wife</small><div class="tree-descendants"><span>Shobhith</span><span>Maanyaath</span><small data-en="Sons" data-kn="ಮಕ್ಕಳು">Sons</small></div></article>
+        </div>
+      </section>
+      <section class="tree-branch">
+        <h3 data-en="Maternal Family" data-kn="ತಾಯಿಯ ಕಡೆಯ ಕುಟುಂಬ">Maternal Family</h3>
+        <div class="maternal-list">
+          <article class="tree-family"><strong>Venkapiah <span>·</span> Savitri</strong><small data-en="Elder brother · Sister-in-law" data-kn="ಹಿರಿಯ ಸಹೋದರ · ಅತ್ತಿಗೆ">Elder brother · Sister-in-law</small></article>
+          <article class="tree-family"><strong>Jalandhar <span>·</span> Ranjini</strong><small data-en="Elder brother · Sister-in-law" data-kn="ಹಿರಿಯ ಸಹೋದರ · ಅತ್ತಿಗೆ">Elder brother · Sister-in-law</small><div class="tree-descendants"><span>Akhila</span><span>Amar</span><small data-en="Children" data-kn="ಮಕ್ಕಳು">Children</small></div></article>
+          <article class="tree-family"><strong>Suvarna <span>·</span> Vijaykumar</strong><small data-en="Sister · Brother-in-law" data-kn="ಸಹೋದರಿ · ಭಾವ">Sister · Brother-in-law</small><div class="tree-descendants"><span>Preetesh</span><span>Pooja</span><small data-en="Children" data-kn="ಮಕ್ಕಳು">Children</small></div><div class="tree-descendants tree-grandchildren"><span>Advik</span><span>Kiran · Manasa</span><span>Smayan</span><small data-en="Grandchildren / family" data-kn="ಮೊಮ್ಮಕ್ಕಳು / ಕುಟುಂಬ">Grandchildren / family</small></div></article>
+          <article class="tree-family"><strong>Dakshaini <span>·</span> Rajgopal</strong><small data-en="Sister · Brother-in-law" data-kn="ಸಹೋದರಿ · ಭಾವ">Sister · Brother-in-law</small><div class="tree-descendants"><span>Sampreeth</span><span>Praharshita</span><small data-en="Children" data-kn="ಮಕ್ಕಳು">Children</small></div></article>
+          <article class="tree-family"><strong>Shubha <span>·</span> Rajesh</strong><small data-en="Sister · Brother-in-law" data-kn="ಸಹೋದರಿ · ಭಾವ">Sister · Brother-in-law</small><div class="tree-descendants"><span>Asmith</span><span>Nidhi</span><small data-en="Children" data-kn="ಮಕ್ಕಳು">Children</small></div></article>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
 <footer class="footer"><div class="footer-video" aria-hidden="true"><video id="footerVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture><source src="./withlove_compressed%20(1).mp4" type="video/mp4"></video></div><div class="script" data-en="With love" data-kn="ಪ್ರೀತಿಯಿಂದ">With love</div><h2 data-en="Shobhith &amp; Sabhya" data-kn="ಶೋಭಿತ್ ಮತ್ತು ಸಭ್ಯಾ">Shobhith & Sabhya</h2><p data-en="14 May 2027 · Samaya Venue and Leisure" data-kn="14 ಮೇ 2027 · Samaya Venue and Leisure">14 May 2027 · Samaya Venue and Leisure</p></footer>
 <script>
 
@@ -199,6 +271,7 @@ weddingMusic.addEventListener('error',()=>{setMusicState(false);musicLabel.textC
 
 const coverScene=document.getElementById('coverScene');
 function fitCoverScene(){const mobile=window.matchMedia('(max-width:650px)').matches;coverScene.setAttribute('preserveAspectRatio',mobile?'xMidYMid meet':'xMidYMid slice');if(mobile){coverScene.setAttribute('viewBox','0 0 600 850');document.getElementById('piano-scene').setAttribute('transform','translate(8 285) scale(.68)');document.getElementById('dancer-scene').setAttribute('transform','translate(310 300) scale(.68)')}else{coverScene.setAttribute('viewBox','0 0 1200 850');document.getElementById('piano-scene').setAttribute('transform','translate(115 300)');document.getElementById('dancer-scene').setAttribute('transform','translate(780 250)')}}fitCoverScene();window.addEventListener('resize',fitCoverScene);
+const familyTreeModal=document.getElementById('familyTreeModal');const openFamilyTree=document.getElementById('openFamilyTree');function closeFamilyTree(){familyTreeModal.classList.remove('is-open');familyTreeModal.setAttribute('aria-hidden','true');document.body.style.overflow=''}openFamilyTree.addEventListener('click',()=>{familyTreeModal.classList.add('is-open');familyTreeModal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'});familyTreeModal.querySelectorAll('[data-close-family-tree]').forEach(el=>el.addEventListener('click',closeFamilyTree));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&familyTreeModal.classList.contains('is-open'))closeFamilyTree()});
 let lang='en';document.getElementById('lang').onclick=()=>{lang=lang==='en'?'kn':'en';document.documentElement.lang=lang;document.querySelectorAll('[data-en]').forEach(e=>e.innerHTML=e.dataset[lang]);if(lang==='kn'){document.querySelector('.cover h1').innerHTML='<span class="kn-name-large">ಶೋಭಿತ್</span> <span class="kn-connector-small">ಮತ್ತು</span> <span class="kn-name-large">ಸಭ್ಯಾ</span>'}document.querySelectorAll('[data-en-aria]').forEach(e=>e.setAttribute('aria-label',e.dataset[lang+'Aria']));document.querySelectorAll('[data-en-alt]').forEach(e=>e.setAttribute('alt',e.dataset[lang+'Alt']));document.title=lang==='en'?'Shobhith & Sabhya — Wedding Invitation':'ಶೋಭಿತ್ ಮತ್ತು ಸಭ್ಯಾ — ವಿವಾಹ ಆಮಂತ್ರಣ';document.getElementById('lang').textContent=lang==='en'?'ಕನ್ನಡ':'English';setMusicState(!weddingMusic.paused);if(!revealed)setup();tick()};
 const c=document.getElementById('scratch'),x=c.getContext('2d'),dateCard=document.querySelector('.date-reveal-card'),fireworks=document.getElementById('dateFireworks'),fx=fireworks.getContext('2d'),afterglow=document.getElementById('dateAfterglow');let down=false,revealed=false,lastCheck=0,particles=[];function setup(){let r=c.getBoundingClientRect(),d=devicePixelRatio||1;c.width=r.width*d;c.height=r.height*d;x.setTransform(d,0,0,d,0,0);let g=x.createLinearGradient(0,0,r.width,r.height);g.addColorStop(0,'#d8c39b');g.addColorStop(.5,'#b9a27c');g.addColorStop(1,'#e6d5b5');x.globalCompositeOperation='source-over';x.fillStyle=g;x.fillRect(0,0,r.width,r.height);x.fillStyle='#fff8e9';x.textAlign='center';x.font='600 12px DM Sans';x.letterSpacing='2px';x.fillText(lang==='en'?'✧  SCRATCH TO REVEAL  ✧':'✧  ಸ್ಕ್ರಾಚ್ ಮಾಡಿ  ✧',r.width/2,r.height/2+4);x.globalCompositeOperation='destination-out'}function resizeFireworks(){let r=fireworks.getBoundingClientRect(),d=devicePixelRatio||1;fireworks.width=r.width*d;fireworks.height=r.height*d;fx.setTransform(d,0,0,d,0,0)}setup();resizeFireworks();function burst(cx,cy){for(let k=0;k<5;k++){let ox=cx+(Math.random()-.5)*180,oy=cy+(Math.random()-.5)*100,n=34;for(let i=0;i<n;i++){let a=Math.PI*2*i/n+(Math.random()-.5)*.16,v=1.4+Math.random()*3.8;particles.push({x:ox,y:oy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:55+Math.random()*30,max:85,size:1.5+Math.random()*2.5,spin:Math.random()*6})}}animateFireworks()}let animating=false;function animateFireworks(){if(animating)return;animating=true;function frame(){fx.clearRect(0,0,fireworks.width,fireworks.height);particles=particles.filter(p=>p.life>0);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.045;p.vx*=.99;p.life--;let alpha=Math.max(0,p.life/p.max);fx.save();fx.globalAlpha=alpha;fx.fillStyle=['#c6a56b','#f2d99d','#fff8e9','#a9b69a'][Math.floor(p.spin)%4];fx.beginPath();fx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2);fx.fill();fx.restore();p.spin+=.08});if(particles.length){requestAnimationFrame(frame)}else{animating=false;fx.clearRect(0,0,fireworks.width,fireworks.height)}}requestAnimationFrame(frame)}function revealDate(){if(revealed)return;revealed=true;dateCard.classList.add('is-revealed');afterglow.classList.add('show');let wrap=fireworks.getBoundingClientRect(),card=dateCard.getBoundingClientRect(),cx=card.left-wrap.left+card.width/2,cy=card.top-wrap.top+card.height/2;burst(cx,cy)}function checkProgress(){let now=Date.now();if(now-lastCheck<250||revealed)return;lastCheck=now;let r=c.getBoundingClientRect(),w=Math.max(1,Math.floor(r.width/12)),h=Math.max(1,Math.floor(r.height/12)),data=x.getImageData(0,0,c.width,c.height).data,cleared=0,total=0;for(let yy=0;yy<c.height;yy+=Math.max(1,Math.floor(c.height/h)))for(let xx=3;xx<c.width*4;xx+=Math.max(4,Math.floor(c.width*4/w))){total++;if(data[yy*c.width*4+xx]===0)cleared++}if(cleared/total>.43)revealDate()}function rub(e){if(!down||revealed)return;let r=c.getBoundingClientRect();x.beginPath();x.arc(e.clientX-r.left,e.clientY-r.top,25,0,Math.PI*2);x.fill();checkProgress()}c.onpointerdown=e=>{if(revealed)return;down=true;c.setPointerCapture(e.pointerId);rub(e)};c.onpointermove=rub;c.onpointerup=()=>down=false;c.onpointercancel=()=>down=false;window.addEventListener('resize',()=>{if(!revealed){setup()}resizeFireworks()});
 function tick(){let d=Math.max(0,new Date('2027-05-14T10:00:00+05:30')-Date.now()),v=[[Math.floor(d/864e5),'Days','ದಿನಗಳು'],[Math.floor(d%864e5/36e5),'Hours','ಗಂಟೆಗಳು'],[Math.floor(d%36e5/6e4),'Minutes','ನಿಮಿಷಗಳು'],[Math.floor(d%6e4/1e3),'Seconds','ಸೆಕೆಂಡುಗಳು']];document.getElementById('count').innerHTML=v.map(a=>'<div>'+String(a[0]).padStart(2,'0')+'<span>'+(lang==='en'?a[1]:a[2])+'</span></div>').join('')}tick();setInterval(tick,1000);
